@@ -1,0 +1,151 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+*{margin:0; padding:0;}
+.container{position:relative; width:1200px; margin:200px auto;}
+li{list-style:none;}
+.box{width:1200px; height:325px; overflow:hidden; position:relative;}
+.imglist{height:325px; width:1200px; position:relative;}
+ul li{position:absolute; top:0; left:0; width:751px; height:300px; transition:transform 0.4s,opacity 0.4s;}
+img{width:100%}
+.p1{transform:translate(-224px) scale(0.81); opacity:0}
+.p2{transform:translate(0px) scale(0.81);opacity:1; transform-origin:0 50%}
+.p3{transform:translate(224px) scale(1); opacity:1; z-index:3}
+.p4{transform:translate(449px) scale(0.81); opacity:1; transform-origin:100% 50%}
+.p5{transform:translate(672px) scale(0.81); opacity:0;}
+.p6{transform:translate(896px) scale(0.81); opacity:0;}
+ol{ position:absolute; right:550px; bottom:0px; line-height:20px; text-align:center;}
+ol li{ float: left; width: 15px; height: 15px; background:gray;  margin-left: 5px; cursor: pointer; font-size: 10px; font-family: Verdana; line-height: 15px; border-radius: 15px; }
+ol li.active{ background:yellow;}
+#left,#right{ width:325px; height:260px; position:absolute;}
+#left{top:32px; left:-100px; background:url(left.png) no-repeat 0 center; cursor:pointer;}
+#right{top:32px; right:-100px;background:url(right.png) no-repeat right center; cursor:pointer;}
+span{ position:absolute; top:0; left:0; background:black; height:100%; width:100%}
+.p2 span,.p4 span{ opacity:0.4;}
+.p3 span{ opacity:0;}
+</style>
+</head>
+
+<body>
+<div id="box" class="container">
+<div class="box">
+	<ul class="imglist">
+        <li class="p3"><a href="javascript:;"><img src="1.jpg"></a><span></span></li>
+        <li class="p4"><a href="javascript:;"><img src="2.jpg"></a><span></span></li>
+        <li class="p5"><a href="javascript:;"><img src="3.jpg"></a><span></span></li>
+        <li class="p6"><a href="javascript:;"><img src="4.jpg"></a><span></span></li>
+        <li class="p1"><a href="javascript:;"><img src="5.jpg"></a><span></span></li>   
+        <li class="p2"><a href="javascript:;"><img src="6.jpg"></a><span></span></li>    
+    </ul>
+    <ol>
+    	<li class="active"></li><li></li><li></li><li></li><li></li><li></li>
+    </ol>
+</div>
+<div id="left" onclick="change(this)"></div>
+<div id="right" onclick="change(this)"></div>
+</div>
+<script>
+var oln=0;
+var ul=document.getElementsByTagName("ul")[0];
+var ol=document.getElementsByTagName("ol")[0];
+var li=ul.getElementsByTagName("li");
+var olist=ol.getElementsByTagName("li");
+function play(){
+	for(var i=0; i<li.length;i++){
+		var number=parseInt(li[i].className[1]);
+		li[i].className=number<2?"p6":"p"+(number-1);
+	}
+	oln++;
+	oln=oln>olist.length-1?0:oln;
+	for(var i=0; i<olist.length;i++){
+		olist[i].className="";
+	}
+	olist[oln].className="active";
+}
+t=setInterval(play,3000);
+box.onmouseover=function(){
+	clearInterval(t);
+}
+box.onmouseout=function(){
+	t=setInterval(play,3000);
+}
+for(var i=0; i<olist.length;i++){
+	olist[i].index=i;
+	olist[i].onmouseover=function(){
+		oln=this.index;
+		for(var i=0;i<olist.length;i++) {
+        	olist[i].className = "";
+        }
+        this.className = "active";
+		/*for(var i=this.index+1;i>this.index&&i<li.length;i++){
+			if(i-this.index+3>6){
+				li[i].className="p"+(i-this.index+3-6);
+			}else{
+				li[i].className="p"+(i-this.index+3);
+			}
+			
+		}
+		for(var i=0;i<this.index;i++){
+			if(3-(this.index-i)<1){
+				console.log(this.index);
+				console.log(6-(this.index-i-3));
+				li[i].className="p"+(6-(this.index-i-3));
+			}else{
+				li[i].className="p"+(3-(this.index-i));
+			}
+			
+		}
+		li[this.index].className="p3";*/ //跟下面等价
+		for(var i=0; i<li.length;i++){
+			if(i<this.index){
+				if(3-(this.index-i)<1){
+					li[i].className="p"+(6-(this.index-i-3));
+				}else{
+					li[i].className="p"+(3-(this.index-i));
+				}
+			}
+			if(i>this.index){
+				if(i-this.index+3>6){
+					li[i].className="p"+(i-this.index+3-6);
+				}else{
+					li[i].className="p"+(i-this.index+3);
+				}
+			}
+			if(i==this.index){
+				li[i].className="p3";
+			}
+		}
+	}
+}
+function change(btn){
+			if(btn.id=='left'){
+				oln--;
+            	oln = oln<0 ? olist.length-1 : oln;
+				for(var i=0;i<olist.length;i++) {
+                	olist[i].className = "";
+            	}
+            	olist[oln].className = "active";
+				for(var i=0; i<li.length;i++){
+					var number=parseInt(li[i].className[1]);
+					li[i].className=number>5?"p1":"p"+(number+1);
+				}
+			}else{
+				play();
+			}
+		}
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
