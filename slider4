@@ -1,0 +1,31 @@
+    var news = $('.news');
+		var newsList = $('.newsList');
+		var length =newsList.find('li').length;
+		var auto;
+		//新闻滚动
+		function play() {
+			var li = newsList.find('li');
+			var height = li.height();
+			var firstChild = li.eq(0);
+			newsList.stop(true,false).animate({
+				marginTop : -height
+				},500,function(){
+					newsList.append(firstChild);
+					newsList.css('margin-top',0);
+					});
+			}
+			
+		//自动滚动				
+		if( length > 1 ){
+			auto= setInterval(play,2000);
+		}
+		
+		
+		//鼠标移上暂停，移除继续滚动
+		news.hover(function(){
+			clearInterval(auto);
+		},function(){
+			if(length > 1){
+				auto = setInterval(play,2000);
+			}
+		});
