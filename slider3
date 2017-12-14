@@ -36,7 +36,9 @@ function move(){
 	});
 }
 $('#right').click(function(){
-	if($('ul')[0].offsetLeft==0){
+	//如果父级有定位元素，原生的.offsetLeft为距父级定位元素左边的距离(不带px)，如果父级没定位元素，原生的.offsetLeft为距页面左边的距离。
+	//jquery的.offset().left总是为距页面左边的距离(不带px)。
+	if($('ul')[0].offsetLeft==0){ 
 		move();
 	}
 })
