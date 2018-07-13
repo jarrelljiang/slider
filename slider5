@@ -34,4 +34,5 @@ var MyMar=setInterval(Marquee,speed);
 a.onmouseover=function() {clearInterval(MyMar)} 
 a.onmouseout=function() {MyMar=setInterval(Marquee,speed)} 
 //可以利用改变父元素的scrollTop配合overflow:hidden实现轮播
-//offsetHeight的值为距最近的已定位的父元素顶部的距离，父元素的border不算，无定位父元素则是距body顶部的距离，存在scrollTop的话都需要加上scrollTop。
+//offsetTop的值为距最近的已定位的父元素顶部的距离，父元素的border不算，无定位父元素则是距body顶部的距离，存在scrollTop的话都需要加上scrollTop。
+//父元素scrollTop增加的话，相当于鼠标滚轮向下滚，子元素往上跑，但是子元素的offsetTop值不变
