@@ -1,0 +1,37 @@
+
+#a{height: 100px;width: 350px;border: 1px solid black;overflow: hidden;margin:100px auto;}
+
+<div id="a">
+    <div id="b">
+        1.adsadsadad<br>
+        2.asdsadsadasd<br>
+        3.asdsadsadasd<br>
+        4.asdsadsadasd<br>
+        5.asdsadsadasd<br>
+        6.asdsadsadasd<br>
+        8.asdsadsadasd<br>
+        9.asdsadsadasd<br>
+        10.asdsadsadasd<br>
+        11.asdsadsadasd<br>
+        12.asdsadsadasd<br>
+        13.asdsadsadasd<br>
+        14.asdsadsadasd<br>
+    </div>
+    <div id="c">
+    </div>
+</div>
+
+var speed = 50; 
+c.innerHTML=b.innerHTML; 
+function Marquee(){ 
+  if(a.scrollTop>=b.offsetHeight) {
+    a.scrollTop=0;
+  }else{ 
+    a.scrollTop++; 
+  } 
+} 
+var MyMar=setInterval(Marquee,speed); 
+a.onmouseover=function() {clearInterval(MyMar)} 
+a.onmouseout=function() {MyMar=setInterval(Marquee,speed)} 
+//可以利用改变父元素的scrollTop配合overflow:hidden实现轮播
+//offsetHeight的值为距最近的已定位的父元素顶部的距离，父元素的border不算，无定位父元素则是距body顶部的距离，存在scrollTop的话都需要加上scrollTop。
